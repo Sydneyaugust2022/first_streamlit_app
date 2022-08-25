@@ -33,6 +33,7 @@ streamlit.dataframe(fruits_to_show)
 # This section to display fruityvice response
 streamlit.header("Fruityvice Fruit Advice!")
 
+################# comment the line below and use the if else statement ################
 #import requests
 ##fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 ##streamlit.text(fruityvice_response.json()) # this line just writes data on the screen
@@ -42,25 +43,39 @@ streamlit.header("Fruityvice Fruit Advice!")
 
 #fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # output it as a table
-#streamlit.dataframe(fruityvice_normalized)
+##streamlit.dataframe(fruityvice_normalized)
 #
 ###### this is from exercise lesson 9 last part ####
 
-fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
-streamlit.write('The user entered ', fruit_choice)
+##fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
+##streamlit.write('The user entered ', fruit_choice)
 
 #import requests
 ##fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 ##streamlit.text(fruityvice_response.json()) # this line just writes data on the screen
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+#fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 
 # take json version of the response and normalize it 
-fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+#fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # output it as a table
-streamlit.dataframe(fruityvice_normalized)
+#streamlit.dataframe(fruityvice_normalized)
 
+############## comment the line above and using the if else statement ###########
+
+try:
+  fruit_choice = streamlit.text_input('What fruit would you like information about?')
+  if not fruit_choice:
+    streamlit.error("Please select a fruit to get information.")
+  else:
+    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    streamlit.dataframe(fruityvice_normalized)
+
+except URLError as e:
+  streamlit.error()
+  
 #adding stop function for debugging frm this line onwards
-streamlit.stop()
+#streamlit.stop()
 
 # This section to display snowflake connector
 #streamlit.header("chapter 12 from the training material adding snowflake connector")
