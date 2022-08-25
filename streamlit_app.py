@@ -123,5 +123,5 @@ if streamlit.button('Add a Fruit to the List'):
    back_from_function = insert_row_snowflake(add_my_fruit)
 
 
-#this will not work correctly, but just go with it for now
+streamlit.text('Thansk for adding' + new_fruit)
 
